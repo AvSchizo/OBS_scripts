@@ -1,15 +1,6 @@
-import obspython as obs
+import obsws_python as obs
 
-def script_description():
-	return "A simple Python script inside OBS Studio."
+client = obs.ReqClient(host='localhost', port=4455, password='EK35AJBEoBhuJ91Z', timeout=3)
 
-def script_load(settings):
-	print("Python script has loaded successfully!")
-
-# Example: trigger an action when the stream starts
-def on_event(event):
-	if event == obs.OBS_FRONTEND_EVENT_STREAMING_STARTED:
-		print("Stream started!")
-
-def script_load(settings):
-	obs.obs_frontend_add_event_callback(on_event)
+version_info = client.get_version()
+print(f"Connected to OBS version: {version_info.obs_version}")
